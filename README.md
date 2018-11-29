@@ -1,0 +1,1 @@
+![Build Status](https://api.travis-ci.org/zhmushan/deno_path.svg?branch=master)
