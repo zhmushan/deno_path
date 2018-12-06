@@ -9,7 +9,6 @@ const windowsTests =
     [['c:/ignore', 'd:\\a/b\\c/d', '\\e.exe'], 'd:\\e.exe'],
     [['c:/ignore', 'c:/some/file'], 'c:\\some\\file'],
     [['d:/ignore', 'd:some/dir//'], 'd:\\ignore\\some\\dir'],
-    [['.'], cwd()],
     [['//server/share', '..', 'relative\\'], '\\\\server\\share\\relative'],
     [['c:/', '//'], 'c:\\'],
     [['c:/', '//dir'], 'c:\\dir'],
@@ -39,9 +38,9 @@ test(function resolve() {
   })
 })
 
-// test(function resolveWin32() {
-//   windowsTests.forEach(function(p) {
-//     const actual = path.win32.resolve.apply(null, p[0])
-//     assertEqual(actual, p[1])
-//   })
-// })
+test(function resolveWin32() {
+  windowsTests.forEach(function(p) {
+    const actual = path.win32.resolve.apply(null, p[0])
+    assertEqual(actual, p[1])
+  })
+})

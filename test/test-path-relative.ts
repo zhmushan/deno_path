@@ -60,10 +60,10 @@ test(function relative() {
   })
 })
 
-// test(function relativeWin32() {
-//   relativeTests.win32.forEach(function(p) {
-//     var expected = p[2]
-//     var actual = path.win32.relative(p[0], p[1])
-//     assertEqual(actual, expected)
-//   })
-// })
+test(function relativeWin32() {
+  relativeTests.win32.forEach(function(p) {
+    var expected = p[2]
+    var actual = path.win32.relative(p[0], p[1])
+    assertEqual(actual, expected)
+  })
+})

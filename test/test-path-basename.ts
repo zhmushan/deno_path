@@ -43,28 +43,28 @@ test(function basename() {
   )
 })
 
-// skip win32 test
-// test(function basenameWin32() {
-//   assertEqual(path.basename('\\dir\\basename.ext'), 'basename.ext');
-//   assertEqual(path.basename('\\basename.ext'), 'basename.ext');
-//   assertEqual(path.basename('basename.ext'), 'basename.ext');
-//   assertEqual(path.basename('basename.ext\\'), 'basename.ext');
-//   assertEqual(path.basename('basename.ext\\\\'), 'basename.ext');
-//   assertEqual(path.basename('foo'), 'foo');
-//   assertEqual(path.basename('aaa\\bbb', '\\bbb'), 'bbb');
-//   assertEqual(path.basename('aaa\\bbb', 'a\\bbb'), 'bbb');
-//   assertEqual(path.basename('aaa\\bbb', 'bbb'), 'bbb');
-//   assertEqual(path.basename('aaa\\bbb\\\\\\\\', 'bbb'), 'bbb');
-//   assertEqual(path.basename('aaa\\bbb', 'bb'), 'b');
-//   assertEqual(path.basename('aaa\\bbb', 'b'), 'bb');
-//   assertEqual(path.basename('C:'), '');
-//   assertEqual(path.basename('C:.'), '.');
-//   assertEqual(path.basename('C:\\'), '');
-//   assertEqual(path.basename('C:\\dir\\base.ext'), 'base.ext');
-//   assertEqual(path.basename('C:\\basename.ext'), 'basename.ext');
-//   assertEqual(path.basename('C:basename.ext'), 'basename.ext');
-//   assertEqual(path.basename('C:basename.ext\\'), 'basename.ext');
-//   assertEqual(path.basename('C:basename.ext\\\\'), 'basename.ext');
-//   assertEqual(path.basename('C:foo'), 'foo');
-//   assertEqual(path.basename('file:stream'), 'file:stream');
-// })
+
+test(function basenameWin32() {
+  assertEqual(path.win32.basename('\\dir\\basename.ext'), 'basename.ext');
+  assertEqual(path.win32.basename('\\basename.ext'), 'basename.ext');
+  assertEqual(path.win32.basename('basename.ext'), 'basename.ext');
+  assertEqual(path.win32.basename('basename.ext\\'), 'basename.ext');
+  assertEqual(path.win32.basename('basename.ext\\\\'), 'basename.ext');
+  assertEqual(path.win32.basename('foo'), 'foo');
+  assertEqual(path.win32.basename('aaa\\bbb', '\\bbb'), 'bbb');
+  assertEqual(path.win32.basename('aaa\\bbb', 'a\\bbb'), 'bbb');
+  assertEqual(path.win32.basename('aaa\\bbb', 'bbb'), 'bbb');
+  assertEqual(path.win32.basename('aaa\\bbb\\\\\\\\', 'bbb'), 'bbb');
+  assertEqual(path.win32.basename('aaa\\bbb', 'bb'), 'b');
+  assertEqual(path.win32.basename('aaa\\bbb', 'b'), 'bb');
+  assertEqual(path.win32.basename('C:'), '');
+  assertEqual(path.win32.basename('C:.'), '.');
+  assertEqual(path.win32.basename('C:\\'), '');
+  assertEqual(path.win32.basename('C:\\dir\\base.ext'), 'base.ext');
+  assertEqual(path.win32.basename('C:\\basename.ext'), 'basename.ext');
+  assertEqual(path.win32.basename('C:basename.ext'), 'basename.ext');
+  assertEqual(path.win32.basename('C:basename.ext\\'), 'basename.ext');
+  assertEqual(path.win32.basename('C:basename.ext\\\\'), 'basename.ext');
+  assertEqual(path.win32.basename('C:foo'), 'foo');
+  assertEqual(path.win32.basename('file:stream'), 'file:stream');
+})

@@ -83,7 +83,7 @@ const windowsJoinTests = [
   [['//', 'foo/bar'], '\\foo\\bar'],
   [['//', '/foo/bar'], '\\foo\\bar'],
   [['\\\\', '/', '/foo/bar'], '\\foo\\bar'],
-  [['//'], '/'],
+  [['//'], '\\'],
   // No UNC path expected (share name missing - questionable).
   [['//foo'], '\\foo'],
   [['//foo/'], '\\foo\\'],
@@ -107,18 +107,18 @@ const windowsJoinTests = [
 
 test(function join() {
   joinTests.forEach(function(p) {
-    var actual = path.posix.join.apply(null, p[0])
+    const actual = path.posix.join.apply(null, p[0])
     assertEqual(actual, p[1])
   })
 })
 
-// test(function joinWin32() {
-//   joinTests.forEach(function(p) {
-//     var actual = path.win32.join.apply(null, p[0]).replace(backslashRE, '/')
-//     assertEqual(actual, p[1])
-//   })
-//   windowsJoinTests.forEach(function(p) {
-//     var actual = path.win32.join.apply(null, p[0])
-//     assertEqual(actual, p[1])
-//   })
-// })
+test(function joinWin32() {
+  joinTests.forEach(function(p) {
+    const actual = path.win32.join.apply(null, p[0]).replace(backslashRE, '/')
+    assertEqual(actual, p[1])
+  })
+  windowsJoinTests.forEach(function(p) {
+    const actual = path.win32.join.apply(null, p[0])
+    assertEqual(actual, p[1])
+  })
+})

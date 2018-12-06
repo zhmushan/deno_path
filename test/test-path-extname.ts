@@ -50,8 +50,8 @@ const pairs = [
 
 test(function extname() {
   pairs.forEach(function(p) {
-    var input = p[0]
-    var expected = p[1]
+    const input = p[0]
+    const expected = p[1]
     assertEqual(expected, path.posix.extname(input))
   })
 
@@ -66,21 +66,21 @@ test(function extname() {
   assertEqual(path.posix.extname('file.\\\\'), '.\\\\')
 })
 
-// test(function extnameWin32() {
-//   pairs.forEach(function(p) {
-//     var input = p[0].replace(slashRE, '\\')
-//     var expected = p[1]
-//     assertEqual(expected, path.win32.extname(input))
-//     assertEqual(expected, path.win32.extname('C:' + input))
-//   })
+test(function extnameWin32() {
+  pairs.forEach(function(p) {
+    const input = p[0].replace(slashRE, '\\')
+    const expected = p[1]
+    assertEqual(expected, path.win32.extname(input))
+    assertEqual(expected, path.win32.extname('C:' + input))
+  })
 
-//   // On Windows, backslash is a path separator.
-//   assertEqual(path.win32.extname('.\\'), '')
-//   assertEqual(path.win32.extname('..\\'), '')
-//   assertEqual(path.win32.extname('file.ext\\'), '.ext')
-//   assertEqual(path.win32.extname('file.ext\\\\'), '.ext')
-//   assertEqual(path.win32.extname('file\\'), '')
-//   assertEqual(path.win32.extname('file\\\\'), '')
-//   assertEqual(path.win32.extname('file.\\'), '.')
-//   assertEqual(path.win32.extname('file.\\\\'), '.')
-// })
+  // On Windows, backslash is a path separator.
+  assertEqual(path.win32.extname('.\\'), '')
+  assertEqual(path.win32.extname('..\\'), '')
+  assertEqual(path.win32.extname('file.ext\\'), '.ext')
+  assertEqual(path.win32.extname('file.ext\\\\'), '.ext')
+  assertEqual(path.win32.extname('file\\'), '')
+  assertEqual(path.win32.extname('file\\\\'), '')
+  assertEqual(path.win32.extname('file.\\'), '.')
+  assertEqual(path.win32.extname('file.\\\\'), '.')
+})

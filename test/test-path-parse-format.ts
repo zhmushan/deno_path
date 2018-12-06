@@ -75,18 +75,18 @@ const unixSpecialCaseFormatTests = [
   [{}, '']
 ]
 
-// test(function parseWin32() {
-//   checkParseFormat(path.win32, winPaths)
-//   checkSpecialCaseParseFormat(path.win32, winSpecialCaseParseTests)
-// })
+test(function parseWin32() {
+  checkParseFormat(path.win32, winPaths)
+  checkSpecialCaseParseFormat(path.win32, winSpecialCaseParseTests)
+})
 
 test(function parse() {
   checkParseFormat(path.posix, unixPaths)
 })
 
-// test(function formatWin32() {
-//   checkFormat(path.win32, winSpecialCaseFormatTests)
-// })
+test(function formatWin32() {
+  checkFormat(path.win32, winSpecialCaseFormatTests)
+})
 
 test(function format() {
   checkFormat(path.posix, unixSpecialCaseFormatTests)
