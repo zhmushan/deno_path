@@ -15,7 +15,7 @@ import { FormatInputPathObject, ParsedPath } from './interface'
 function assertPath(path: string) {
   if (typeof path !== 'string') {
     throw new TypeError(
-      'Path must be a string. Received ' + JSON.stringify(path)
+      `Path must be a string. Received ${JSON.stringify(path)}`
     )
   }
 }
@@ -135,15 +135,15 @@ const win32 = {
         // absolute path, get cwd for that drive, or the process cwd if
         // the drive cwd is not available. We're sure the device is not
         // a UNC path at this points, because UNC paths are always absolute.
-        path = env()['=' + resolvedDevice] || cwd()
+        path = env()[`=${resolvedDevice}`] || cwd()
 
         // Verify that a cwd was found and that it actually points
         // to our drive. If not, default to the drive's root.
         if (
           path === undefined ||
-          path.slice(0, 3).toLowerCase() !== resolvedDevice.toLowerCase() + '\\'
+          path.slice(0, 3).toLowerCase() !== `${resolvedDevice.toLowerCase()}\\`
         ) {
-          path = resolvedDevice + '\\'
+          path = `${resolvedDevice}\\`
         }
       }
 
@@ -194,13 +194,12 @@ const win32 = {
                 }
                 if (j === len) {
                   // We matched a UNC root only
-
-                  device = '\\\\' + firstPart + '\\' + path.slice(last)
+                  device = `\\\\${firstPart}\\${path.slice(last)}`
                   rootEnd = j
                 } else if (j !== last) {
                   // We matched a UNC root with leftovers
 
-                  device = '\\\\' + firstPart + '\\' + path.slice(last, j)
+                  device = `\\\\${firstPart}\\${path.slice(last, j)}`
                   rootEnd = j
                 }
               }
@@ -243,7 +242,7 @@ const win32 = {
         resolvedDevice = device
       }
       if (!resolvedAbsolute) {
-        resolvedTail = path.slice(rootEnd) + '\\' + resolvedTail
+        resolvedTail = `${path.slice(rootEnd)}\\${resolvedTail}`
         resolvedAbsolute = isAbsolute
       }
 
@@ -313,11 +312,11 @@ const win32 = {
                 // Return the normalized version of the UNC root since there
                 // is nothing left to process
 
-                return '\\\\' + firstPart + '\\' + path.slice(last) + '\\'
+                return `\\\\${firstPart}\\${path.slice(last)}\\`
               } else if (j !== last) {
                 // We matched a UNC root with leftovers
 
-                device = '\\\\' + firstPart + '\\' + path.slice(last, j)
+                device = `\\\\${firstPart}\\${path.slice(last, j)}`
                 rootEnd = j
               }
             }
@@ -363,7 +362,7 @@ const win32 = {
       tail += '\\'
     if (device === undefined) {
       if (isAbsolute) {
-        if (tail.length > 0) return '\\' + tail
+        if (tail.length > 0) return `\\${tail}`
         else return '\\'
       } else if (tail.length > 0) {
         return tail
@@ -371,8 +370,8 @@ const win32 = {
         return ''
       }
     } else if (isAbsolute) {
-      if (tail.length > 0) return device + '\\' + tail
-      else return device + '\\'
+      if (tail.length > 0) return `${device}\\${tail}`
+      else return `${device}\\`
     } else if (tail.length > 0) {
       return device + tail
     } else {
@@ -408,7 +407,7 @@ const win32 = {
       assertPath(arg)
       if (arg.length > 0) {
         if (joined === undefined) joined = firstPart = arg
-        else joined += '\\' + arg
+        else joined += `\\${arg}`
       }
     }
 
@@ -452,7 +451,7 @@ const win32 = {
       }
 
       // Replace the slashes if needed
-      if (slashCount >= 2) joined = '\\' + joined.slice(slashCount)
+      if (slashCount >= 2) joined = `\\${joined.slice(slashCount)}`
     }
 
     return win32.normalize(joined)
@@ -584,7 +583,7 @@ const win32 = {
           const code = resolvedPath.charCodeAt(2)
           if (code !== CHAR_QUESTION_MARK && code !== CHAR_DOT) {
             // Matched non-long UNC root, convert the path to a long UNC path
-            return '\\\\?\\UNC\\' + resolvedPath.slice(2)
+            return `\\\\?\\UNC\\${resolvedPath.slice(2)}`
           }
         }
       } else if (isWindowsDeviceRoot(resolvedPath.charCodeAt(0))) {
@@ -595,7 +594,7 @@ const win32 = {
           resolvedPath.charCodeAt(2) === CHAR_BACKWARD_SLASH
         ) {
           // Matched device root, convert the path to a long UNC path
-          return '\\\\?\\' + resolvedPath
+          return `\\\\?\\${resolvedPath}`
         }
       }
     }
@@ -840,8 +839,7 @@ const win32 = {
   format: function format(pathObject: FormatInputPathObject) {
     if (pathObject === null || typeof pathObject !== 'object') {
       throw new TypeError(
-        'The "pathObject" argument must be of type Object. Received type ' +
-          typeof pathObject
+        `The "pathObject" argument must be of type Object. Received type ${typeof pathObject}`
       )
     }
     return _format('\\', pathObject)
@@ -1021,7 +1019,7 @@ const posix = {
         continue
       }
 
-      resolvedPath = path + '/' + resolvedPath
+      resolvedPath = `${path}/${resolvedPath}`
       resolvedAbsolute = path.charCodeAt(0) === CHAR_FORWARD_SLASH
     }
 
@@ -1037,7 +1035,7 @@ const posix = {
     )
 
     if (resolvedAbsolute) {
-      if (resolvedPath.length > 0) return '/' + resolvedPath
+      if (resolvedPath.length > 0) return `/${resolvedPath}`
       else return '/'
     } else if (resolvedPath.length > 0) {
       return resolvedPath
@@ -1061,7 +1059,7 @@ const posix = {
     if (path.length === 0 && !isAbsolute) path = '.'
     if (path.length > 0 && trailingSeparator) path += '/'
 
-    if (isAbsolute) return '/' + path
+    if (isAbsolute) return `/${path}`
     return path
   },
 
@@ -1078,7 +1076,7 @@ const posix = {
       assertPath(arg)
       if (arg.length > 0) {
         if (joined === undefined) joined = arg
-        else joined += '/' + arg
+        else joined += `/${arg}`
       }
     }
     if (joined === undefined) return '.'
@@ -1321,8 +1319,7 @@ const posix = {
   format: function format(pathObject: FormatInputPathObject) {
     if (pathObject === null || typeof pathObject !== 'object') {
       throw new TypeError(
-        'The "pathObject" argument must be of type Object. Received type ' +
-          typeof pathObject
+        `The "pathObject" argument must be of type Object. Received type ${typeof pathObject}`
       )
     }
     return _format('/', pathObject)
