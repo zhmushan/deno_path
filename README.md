@@ -5,5 +5,5 @@
 Usage:
 
 ```ts
-import * as path from 'https://deno.land/x/path.ts'
+import * as path from 'https://deno.land/x/path/index.ts'
 ```
